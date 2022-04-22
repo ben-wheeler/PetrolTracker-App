@@ -13,7 +13,7 @@ struct Entry: Identifiable, Codable {
     let km: Double
     let fuel: Double
     let perHundred: Double
-    let name: String
+    let name: String    
 }
 
 class Log: ObservableObject {

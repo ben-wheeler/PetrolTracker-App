@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DetailView: View {
+    
     let item: Entry
     var body: some View {
         NavigationView{
@@ -16,10 +17,24 @@ struct DetailView: View {
                     Text("Distance Travelled")
                         .bold()
                     Spacer()
-                    Text(item.name)
+                    Text(String(item.km))
+                    Text("km")
+                }
+                HStack{
+                    Text("Petrol Used")
+                        .bold()
+                    Spacer()
+                    Text(String(item.fuel))
+                    Text("L")
+                }
+                HStack{
+                    Text("per 100")
+                        .bold()
+                    Spacer()
+                    Text(String(format:"%.2f", item.fuel/item.km*100))
                 }
             }
-            .navigationTitle(item.created.formatted())
+            .navigationTitle(Text(item.created, format: .dateTime.day().month().year()))
 
         }
     }
@@ -27,7 +42,7 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     
-    static let test = Entry(created: Date.now, km: 10.2, fuel: 20.2, perHundred: 9.8, name: "abcd")
+    static let test = Entry(created: Date.now, km: 212.6, fuel: 18.58, perHundred: 9.8, name: "abcd")
     
     static var previews: some View {
         DetailView(item: test)
