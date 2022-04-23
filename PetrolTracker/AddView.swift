@@ -15,7 +15,8 @@ struct NewView: View {
     
     @State private var name = "test"
     @State private var created = Date.now
-    @State private var distanceTemp = ""
+    @State private var inputDistance = ""
+    @State private var inputFuel = ""
     
     @State private var errorMessage = ""
     @State private var errorTitle = ""
@@ -27,7 +28,10 @@ struct NewView: View {
                 Section {
 //                    TextField("Name", text: $name)
 
-                    TextField(text: $distanceTemp, prompt: Text("Required")) {
+                    TextField(text: $inputDistance, prompt: Text("Distance")) {
+                        Text("Distance")
+                    }
+                    TextField(text: $inputFuel, prompt: Text("Fuel")) {
                         Text("Distance")
                     }
 //                    Toggle("Time", isOn: $hasTime)
