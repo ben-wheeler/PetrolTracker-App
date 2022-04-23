@@ -32,7 +32,7 @@ struct NewView: View {
                         Text("Distance")
                     }
                     TextField(text: $inputFuel, prompt: Text("Fuel")) {
-                        Text("Distance")
+                        Text("Fuel")
                     }
 //                    Toggle("Time", isOn: $hasTime)
 //                    if(hasTime){
