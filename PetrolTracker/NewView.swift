@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewView: View {
     
-    @ObservedObject var todos: Log
+    @ObservedObject var log: Log
     
     @Environment(\.dismiss) var dismiss
     
@@ -25,7 +25,7 @@ struct NewView: View {
         NavigationView {
             Form{
                 Section {
-                    TextField("Name", text: $name)
+                    TextField("Distance Travr", text: $name)
                     DatePicker("Due Date", selection: $due, in: Date.now..., displayedComponents: .date)
                     Toggle("Time", isOn: $hasTime)
                     if(hasTime){
@@ -33,7 +33,7 @@ struct NewView: View {
                     }
                 }
             }
-            .navigationTitle("Create a new To-Do")
+            .navigationTitle("New Entry")
             .toolbar {
                 ToolbarItemGroup(placement: .cancellationAction){
                     Button {
@@ -43,13 +43,13 @@ struct NewView: View {
                             .foregroundColor(Color(.gray))
                     }
                 }
-                ToolbarItemGroup(placement: .confirmationAction){
-                    Button("Save") {
-                        let item = TaskItem(name: name, due: due, hasTime: hasTime, completed: false, created: Date.now)
-                        todos.items.append(item)
-                        dismiss()
-                    }
-                }
+//                ToolbarItemGroup(placement: .confirmationAction){
+//                    Button("Save") {
+//                        let item = Entry(name: name, due: due, hasTime: hasTime, completed: false, created: Date.now)
+//                        todos.items.append(item)
+//                        dismiss()
+//                    }
+//                }
             }
         }
     }
@@ -57,6 +57,6 @@ struct NewView: View {
 
 struct NewView_Previews: PreviewProvider {
     static var previews: some View {
-        NewView(todos: ToDos())
+        NewView(log: Log())
     }
 }
