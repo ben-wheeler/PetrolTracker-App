@@ -35,19 +35,12 @@ class Log: ObservableObject {
     }
 }
 
-func createFormatter() -> Formatter {
-    let formatter1 = DateFormatter()
-    formatter1.dateStyle = .short
-    return formatter1
-}
-
 struct ContentView: View {
     @StateObject var History = Log()
     
     @State private var showingSheet = false
-    
-    let formatter = createFormatter()
-    
+
+
     var body: some View {
         NavigationView {
             List{
@@ -56,7 +49,7 @@ struct ContentView: View {
                         DetailView(item: log)
                     }
                     label : {
-                        Text(formatter.string(for: log.created))
+                        Text(log.created, style: .date)
                     }
                 }
             }

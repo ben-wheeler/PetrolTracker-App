@@ -50,7 +50,13 @@ struct NewView: View {
                     }
                 }
                 Section{
-                    Text("\(fuelUsed/distanceTravelled*100, specifier: "%.2f")")
+                    if((fuelUsed/distanceTravelled*100).isNaN){
+                        Text("0.00")
+                        .foregroundColor(.gray)
+                    }
+                    else{
+                        Text("\(fuelUsed/distanceTravelled*100, specifier: "%.2f")")
+                    }
                 }
             }
             .navigationTitle("New Entry")
