@@ -72,7 +72,6 @@ struct ContentView: View {
                 NewView(log: History)
             }
         }
-        
     }
     
     func removeItems(at offsets: IndexSet) {
