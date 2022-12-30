@@ -14,7 +14,6 @@ struct Entry: Identifiable, Codable {
     var distance: Measurement<UnitLength>
     let fuel: Measurement<UnitVolume>
     let efficiency: Measurement<UnitFuelEfficiency>
-    let name: String    
 }
 
 class Log: ObservableObject {
@@ -36,10 +35,18 @@ class Log: ObservableObject {
     }
 }
 
+func createFormatter() -> Formatter {
+    let formatter1 = DateFormatter()
+    formatter1.dateStyle = .short
+    return formatter1
+}
+
 struct ContentView: View {
     @StateObject var History = Log()
     
     @State private var showingSheet = false
+    
+    let formatter = createFormatter()
     
     var body: some View {
         NavigationView {
@@ -49,7 +56,7 @@ struct ContentView: View {
                         DetailView(item: log)
                     }
                     label : {
-                        Text(log.name)
+                        Text(formatter.string(for: log.created))
                     }
                 }
             }

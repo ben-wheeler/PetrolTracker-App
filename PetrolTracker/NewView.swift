@@ -13,25 +13,44 @@ struct NewView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @State private var name = ""
-    @State private var created = Date.now
-    @State private var hasTime = false
-    
+    @State private var dateLogged = Date.now
+    @State private var distanceTravelled = 0.0
+    @State private var fuelUsed = 0.0
+
     @State private var errorMessage = ""
     @State private var errorTitle = ""
     @State private var showError = false
     
-    let formatter = DateFormatter()
+    let distanceInputs = ["Miles", "Kilometers"]
+    // Date logged
+    // Distance Travelled
+    // Fuel used
     
+    // Efficiency
+        
     var body: some View {
         NavigationView {
             Form{
                 Section {
-                    DatePicker("Date logged", selection: $created, in: Date.now..., displayedComponents: .date)
-                    Toggle("Time", isOn: $hasTime)
-                    if(hasTime){
-                        DatePicker("Due Date", selection: $created, in: Date.now..., displayedComponents: .hourAndMinute)
+                    DatePicker("Date logged", selection: $dateLogged, in: Date.now..., displayedComponents: .date)
+                    HStack{
+                        Text("Distance Travelled")
+                        TextField("Distance Travelled", value: $distanceTravelled, format: .number)
+                            .keyboardType(.numberPad)
+                            .multilineTextAlignment(.trailing)
+                        Text("km")
                     }
+                    HStack{
+                        Text("Fuel Used")
+                        Spacer()
+                        TextField("Fuel Used", value: $fuelUsed, format: .number)
+                            .keyboardType(.numberPad)
+                            .multilineTextAlignment(.trailing)
+                        Text("L")
+                    }
+                }
+                Section{
+                    Text("\(fuelUsed/distanceTravelled*100, specifier: "%.2f")")
                 }
             }
             .navigationTitle("New Entry")
@@ -44,13 +63,28 @@ struct NewView: View {
                             .foregroundColor(Color(.gray))
                     }
                 }
-//                ToolbarItemGroup(placement: .confirmationAction){
-//                    Button("Save") {
-//                        let item = Entry(name: name, due: due, hasTime: hasTime, completed: false, created: Date.now)
-//                        todos.items.append(item)
-//                        dismiss()
-//                    }
-//                }
+                
+                //            let created: Date
+                //            var distance: Measurement<UnitLength>
+                //            let fuel: Measurement<UnitVolume>
+                //            let efficiency: Measurement<UnitFuelEfficiency>
+                ToolbarItemGroup(placement: .confirmationAction){
+                    Button("Save") {
+                        //                    var distance: Measurement<UnitLength>
+                        //                    let fuel: Measurement<UnitVolume>
+                        //                    let efficiency: Measurement<UnitFuelEfficiency>
+                        
+                        //                    let locale = Locale.current //NSLocale.current
+                        //                    let isMetric = locale.usesMetricSystem
+                        let distance = Measurement(value: distanceTravelled, unit: UnitLength.kilometers)
+                        let fuel = Measurement(value: fuelUsed, unit: UnitVolume.liters)
+                        let efficiency = Measurement(value: fuelUsed/distanceTravelled*100, unit: UnitFuelEfficiency.litersPer100Kilometers)
+                        
+                        let item = Entry(created: dateLogged, distance: distance, fuel: fuel, efficiency: efficiency)
+                        log.items.append(item)
+                        dismiss()
+                    }
+                }
             }
         }
     }

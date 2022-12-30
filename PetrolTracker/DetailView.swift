@@ -34,7 +34,6 @@ struct DetailView: View {
                 }
             }
             .navigationTitle(Text(item.created, format: .dateTime.day().month().year()))
-
         }
     }
 }
@@ -44,7 +43,7 @@ struct DetailView_Previews: PreviewProvider {
     static let v = Measurement(value: 65468789645, unit: UnitVolume.liters)
     static let e = Measurement(value: 9.8, unit: UnitFuelEfficiency.litersPer100Kilometers)
 
-    static let test = Entry(created: Date.now, distance: d, fuel: v, efficiency: e, name: "abcd")
+    static let test = Entry(created: Date.now, distance: d, fuel: v, efficiency: e)
     
     static var previews: some View {
         DetailView(item: test)
