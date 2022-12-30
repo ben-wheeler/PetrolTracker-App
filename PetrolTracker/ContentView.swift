@@ -52,6 +52,7 @@ struct ContentView: View {
                         Text(log.created, style: .date)
                     }
                 }
+                .onDelete(perform: removeItems)
             }
             .navigationTitle("History")
                         .toolbar {
@@ -74,9 +75,9 @@ struct ContentView: View {
         
     }
     
-//    func removeItems(at offsets: IndexSet) {
-//        todos.items.remove(atOffsets: offsets)
-//    }
+    func removeItems(at offsets: IndexSet) {
+        History.items.remove(atOffsets: offsets)
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
