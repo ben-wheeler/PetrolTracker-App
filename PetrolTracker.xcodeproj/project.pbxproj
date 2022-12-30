@@ -12,6 +12,7 @@
 		B587967E28124D1100ABA24E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B587967D28124D1100ABA24E /* Assets.xcassets */; };
 		B587968128124D1100ABA24E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B587968028124D1100ABA24E /* Preview Assets.xcassets */; };
 		B587968828124FE500ABA24E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B587968728124FE500ABA24E /* DetailView.swift */; };
+		B97827F3295E717B0037F8B3 /* NewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97827F2295E717B0037F8B3 /* NewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		B587967D28124D1100ABA24E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B587968028124D1100ABA24E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B587968728124FE500ABA24E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		B97827F2295E717B0037F8B3 /* NewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				B587967928124D1100ABA24E /* PetrolApp.swift */,
 				B587967B28124D1100ABA24E /* ContentView.swift */,
 				B587968728124FE500ABA24E /* DetailView.swift */,
+				B97827F2295E717B0037F8B3 /* NewView.swift */,
 				B587967D28124D1100ABA24E /* Assets.xcassets */,
 				B587967F28124D1100ABA24E /* Preview Content */,
 			);
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B587967C28124D1100ABA24E /* ContentView.swift in Sources */,
+				B97827F3295E717B0037F8B3 /* NewView.swift in Sources */,
 				B587968828124FE500ABA24E /* DetailView.swift in Sources */,
 				B587967A28124D1100ABA24E /* PetrolApp.swift in Sources */,
 			);
@@ -270,7 +274,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Petrol/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = G934N92P8B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -299,7 +303,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Petrol/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = G934N92P8B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

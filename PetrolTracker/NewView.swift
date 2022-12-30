@@ -14,22 +14,23 @@ struct NewView: View {
     @Environment(\.dismiss) var dismiss
     
     @State private var name = ""
-    @State private var due = Date.now
+    @State private var created = Date.now
     @State private var hasTime = false
     
     @State private var errorMessage = ""
     @State private var errorTitle = ""
     @State private var showError = false
     
+    let formatter = DateFormatter()
+    
     var body: some View {
         NavigationView {
             Form{
                 Section {
-                    TextField("Distance Travr", text: $name)
-                    DatePicker("Due Date", selection: $due, in: Date.now..., displayedComponents: .date)
+                    DatePicker("Date logged", selection: $created, in: Date.now..., displayedComponents: .date)
                     Toggle("Time", isOn: $hasTime)
                     if(hasTime){
-                        DatePicker("Due Date", selection: $due, in: Date.now..., displayedComponents: .hourAndMinute)
+                        DatePicker("Due Date", selection: $created, in: Date.now..., displayedComponents: .hourAndMinute)
                     }
                 }
             }

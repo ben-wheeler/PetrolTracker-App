@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct Entry: Identifiable, Codable {
     var id = UUID()
     let created: Date
-    let km: Double
-    let fuel: Double
-    let perHundred: Double
+    var distance: Measurement<UnitLength>
+    let fuel: Measurement<UnitVolume>
+    let efficiency: Measurement<UnitFuelEfficiency>
     let name: String    
 }
 
@@ -66,9 +67,9 @@ struct ContentView: View {
                             }
                         }
             
-//            .sheet(isPresented: $showingSheet) {
-//                NewView(todos: todos)
-//            }
+            .sheet(isPresented: $showingSheet) {
+                NewView(log: History)
+            }
         }
         
     }

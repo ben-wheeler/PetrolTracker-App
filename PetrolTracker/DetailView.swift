@@ -8,30 +8,29 @@
 import SwiftUI
 
 struct DetailView: View {
+     
+    var item: Entry
     
-    let item: Entry
-    var body: some View {
+        var body: some View {
         NavigationView{
             List{
                 HStack{
                     Text("Distance Travelled")
                         .bold()
                     Spacer()
-                    Text(String(item.km))
-                    Text("km")
+                    Text(item.distance, format: .measurement(width: .abbreviated))
                 }
                 HStack{
                     Text("Petrol Used")
                         .bold()
                     Spacer()
-                    Text(String(item.fuel))
-                    Text("L")
+                    Text(item.fuel, format: .measurement(width: .abbreviated))
                 }
                 HStack{
-                    Text("per 100")
+                    Text("Efficiency")
                         .bold()
                     Spacer()
-                    Text(String(format:"%.2f", item.fuel/item.km*100))
+                    Text(item.efficiency, format: .measurement(width: .abbreviated))
                 }
             }
             .navigationTitle(Text(item.created, format: .dateTime.day().month().year()))
@@ -41,10 +40,14 @@ struct DetailView: View {
 }
 
 struct DetailView_Previews: PreviewProvider {
-    
-    static let test = Entry(created: Date.now, km: 212.6, fuel: 18.58, perHundred: 9.8, name: "abcd")
+    static let d = Measurement(value: 216.5, unit: UnitLength.kilometers)
+    static let v = Measurement(value: 65468789645, unit: UnitVolume.liters)
+    static let e = Measurement(value: 9.8, unit: UnitFuelEfficiency.litersPer100Kilometers)
+
+    static let test = Entry(created: Date.now, distance: d, fuel: v, efficiency: e, name: "abcd")
     
     static var previews: some View {
         DetailView(item: test)
+//            .environment(\.locale, .init(identifier: "en_AU"))
     }
 }
