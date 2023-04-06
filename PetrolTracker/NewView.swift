@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct NewView: View {
-    
-    @ObservedObject var log: Log
-    
+        
+    @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
     @State private var dateLogged = Date.now
@@ -69,11 +68,7 @@ struct NewView: View {
                             .foregroundColor(Color(.gray))
                     }
                 }
-                
-                //            let created: Date
-                //            var distance: Measurement<UnitLength>
-                //            let fuel: Measurement<UnitVolume>
-                //            let efficiency: Measurement<UnitFuelEfficiency>
+
                 ToolbarItemGroup(placement: .confirmationAction){
                     Button("Save") {
                         //                    var distance: Measurement<UnitLength>
@@ -82,13 +77,23 @@ struct NewView: View {
                         
                         //                    let locale = Locale.current //NSLocale.current
                         //                    let isMetric = locale.usesMetricSystem
-                        let distance = Measurement(value: distanceTravelled, unit: UnitLength.kilometers)
-                        let fuel = Measurement(value: fuelUsed, unit: UnitVolume.liters)
-                        let efficiency = Measurement(value: fuelUsed/distanceTravelled*100, unit: UnitFuelEfficiency.litersPer100Kilometers)
+//                        let distance = Measurement(value: distanceTravelled, unit: UnitLength.kilometers)
+//                        let fuel = Measurement(value: fuelUsed, unit: UnitVolume.liters)
+//                        let efficiency = Measurement(value: fuelUsed/distanceTravelled*100, unit: UnitFuelEfficiency.litersPer100Kilometers)
+                        let newLog = Log(context: moc)
+                        newLog.id = UUID()
+                        newLog.created = dateLogged
+                        newLog.distance = distanceTravelled
+                        newLog.fuel = fuelUsed
+                        newLog.efficiency = fuelUsed/distanceTravelled*100
                         
-                        let item = Entry(created: dateLogged, distance: distance, fuel: fuel, efficiency: efficiency)
-                        log.items.append(item)
-                        dismiss()
+                        do {
+                            try moc.save()
+                            dismiss()
+                        } catch {
+                            let nsError = error as NSError
+                            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                        }
                     }
                 }
             }
@@ -98,6 +103,6 @@ struct NewView: View {
 
 struct NewView_Previews: PreviewProvider {
     static var previews: some View {
-        NewView(log: Log())
+        NewView()
     }
 }
