@@ -9,44 +9,44 @@ import Foundation
 import SwiftUI
 import CoreData
 
-func avgDistance(sessions: FetchedResults<Log>) -> Double
+func avgDistance(logs: FetchedResults<Log>) -> Double
 {
     var averageDistance: Double = 0
-    if(sessions.count != 0)
+    if(logs.count != 0)
     {
-        for session in sessions
+        for session in logs
         {
             averageDistance += session.distance
         }
-        averageDistance /= Double(sessions.count)
+        averageDistance /= Double(logs.count)
     }
     return averageDistance
 }
 
-func avgFuel(sessions: FetchedResults<Log>) -> Double
+func avgFuel(logs: FetchedResults<Log>) -> Double
 {
     var averageFuel: Double = 0
-    if(sessions.count != 0)
+    if(logs.count != 0)
     {
-        for session in sessions
+        for session in logs
         {
             averageFuel += session.fuel
         }
-        averageFuel /= Double(sessions.count)
+        averageFuel /= Double(logs.count)
     }
     return averageFuel
 }
 
-func avgEfficiency(sessions: FetchedResults<Log>) -> Double
+func avgEfficiency(logs: FetchedResults<Log>) -> Double
 {
     var averageEfficiency: Double = 0
-    if(sessions.count != 0)
+    if(logs.count != 0)
     {
-        for session in sessions
+        for session in logs
         {
             averageEfficiency += session.efficiency
         }
-        averageEfficiency /= Double(sessions.count)
+        averageEfficiency /= Double(logs.count)
     }
     return averageEfficiency
 }

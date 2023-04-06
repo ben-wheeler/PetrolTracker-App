@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct NewView: View {
-        
+    
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
     @State private var dateLogged = Date.now
-    @State private var distanceTravelled = 0.0
-    @State private var fuelUsed = 0.0
-
+    @State private var distanceTravelled: Double?
+    @State private var fuelUsed: Double?
+    
     @State private var errorMessage = ""
     @State private var errorTitle = ""
     @State private var showError = false
@@ -26,15 +26,15 @@ struct NewView: View {
     // Fuel used
     
     // Efficiency
-        
+    
     var body: some View {
         NavigationView {
             Form{
                 Section {
                     DatePicker("Date logged", selection: $dateLogged, in: Date.now..., displayedComponents: .date)
-                    HStack{
+                    HStack {
                         Text("Distance Travelled")
-                        TextField("Distance Travelled", value: $distanceTravelled, format: .number)
+                        TextField("0", value: $distanceTravelled, format: .number)
                             .keyboardType(.numberPad)
                             .multilineTextAlignment(.trailing)
                         Text("km")
@@ -49,18 +49,18 @@ struct NewView: View {
                     }
                 }
                 Section{
-                    if((fuelUsed/distanceTravelled*100).isNaN){
+                    if(fuelUsed == nil || distanceTravelled == nil){
                         Text("0.00")
-                        .foregroundColor(.gray)
+                            .foregroundColor(.gray)
                     }
                     else{
-                        Text("\(fuelUsed/distanceTravelled*100, specifier: "%.2f")")
+                        Text("\(fuelUsed!/distanceTravelled!*100, specifier: "%.2f")")
                     }
                 }
             }
             .navigationTitle("New Entry")
             .toolbar {
-                ToolbarItemGroup(placement: .cancellationAction){
+                ToolbarItemGroup(placement: .cancellationAction) {
                     Button {
                         dismiss()
                     } label: {
@@ -68,8 +68,8 @@ struct NewView: View {
                             .foregroundColor(Color(.gray))
                     }
                 }
-
-                ToolbarItemGroup(placement: .confirmationAction){
+                
+                ToolbarItemGroup(placement: .confirmationAction) {
                     Button("Save") {
                         //                    var distance: Measurement<UnitLength>
                         //                    let fuel: Measurement<UnitVolume>
@@ -77,15 +77,16 @@ struct NewView: View {
                         
                         //                    let locale = Locale.current //NSLocale.current
                         //                    let isMetric = locale.usesMetricSystem
-//                        let distance = Measurement(value: distanceTravelled, unit: UnitLength.kilometers)
-//                        let fuel = Measurement(value: fuelUsed, unit: UnitVolume.liters)
-//                        let efficiency = Measurement(value: fuelUsed/distanceTravelled*100, unit: UnitFuelEfficiency.litersPer100Kilometers)
+                        //                        let distance = Measurement(value: distanceTravelled, unit: UnitLength.kilometers)
+                        //                        let fuel = Measurement(value: fuelUsed, unit: UnitVolume.liters)
+                        //                        let efficiency = Measurement(value: fuelUsed/distanceTravelled*100, unit: UnitFuelEfficiency.litersPer100Kilometers)
+                        
                         let newLog = Log(context: moc)
                         newLog.id = UUID()
                         newLog.created = dateLogged
-                        newLog.distance = distanceTravelled
-                        newLog.fuel = fuelUsed
-                        newLog.efficiency = fuelUsed/distanceTravelled*100
+                        newLog.distance = distanceTravelled ?? 0
+                        newLog.fuel = fuelUsed ?? 0
+                        newLog.efficiency = (fuelUsed ?? 0)/(distanceTravelled ?? 0)*100
                         
                         do {
                             try moc.save()
