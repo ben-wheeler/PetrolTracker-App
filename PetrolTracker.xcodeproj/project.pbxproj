@@ -12,6 +12,7 @@
 		B587967E28124D1100ABA24E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B587967D28124D1100ABA24E /* Assets.xcassets */; };
 		B587968128124D1100ABA24E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B587968028124D1100ABA24E /* Preview Assets.xcassets */; };
 		B587968828124FE500ABA24E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B587968728124FE500ABA24E /* DetailView.swift */; };
+		B9769C8E29DE7AF400388A43 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B9769C8C29DE7AF400388A43 /* Model.xcdatamodeld */; };
 		B97827F3295E717B0037F8B3 /* NewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97827F2295E717B0037F8B3 /* NewView.swift */; };
 /* End PBXBuildFile section */
 
@@ -22,6 +23,7 @@
 		B587967D28124D1100ABA24E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B587968028124D1100ABA24E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B587968728124FE500ABA24E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		B9769C8D29DE7AF400388A43 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		B97827F2295E717B0037F8B3 /* NewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +62,7 @@
 				B587968728124FE500ABA24E /* DetailView.swift */,
 				B97827F2295E717B0037F8B3 /* NewView.swift */,
 				B587967D28124D1100ABA24E /* Assets.xcassets */,
+				B9769C8C29DE7AF400388A43 /* Model.xcdatamodeld */,
 				B587967F28124D1100ABA24E /* Preview Content */,
 			);
 			path = PetrolTracker;
@@ -145,6 +148,7 @@
 			files = (
 				B587967C28124D1100ABA24E /* ContentView.swift in Sources */,
 				B97827F3295E717B0037F8B3 /* NewView.swift in Sources */,
+				B9769C8E29DE7AF400388A43 /* Model.xcdatamodeld in Sources */,
 				B587968828124FE500ABA24E /* DetailView.swift in Sources */,
 				B587967A28124D1100ABA24E /* PetrolApp.swift in Sources */,
 			);
@@ -349,6 +353,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B9769C8C29DE7AF400388A43 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B9769C8D29DE7AF400388A43 /* Model.xcdatamodel */,
+			);
+			currentVersion = B9769C8D29DE7AF400388A43 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B587966E28124D1100ABA24E /* Project object */;
 }
