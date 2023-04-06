@@ -20,21 +20,58 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List{
-                ForEach(logs){ log in
-                    NavigationLink {
-                        DetailView(item: log)
-                    }
-                    label : {
-                        Text(log.created ?? Date(), style: .date)
+                Section(header: Text("Statistics"))
+                {
+                    VStack(alignment: .leading) {
+                        HStack{
+                            Text("Average Reading Statistics")
+                                .font(.headline)
+                        }
+                        .foregroundColor(.accentColor)
+                        .padding(.vertical, 5)
+                        HStack{
+                            Image(systemName: "road.lanes")
+                            Text(String(format: "%.2f", avgDistance(logs: logs)))
+                                .font(.headline)
+                            Text("km")
+                                .foregroundColor(Color(hue: 1.0, saturation: 0.009, brightness: 0.398))
+                        }
+                        Spacer()
+                        HStack{
+                            Image(systemName: "fuelpump")
+                            Text(String(format: "%.2f", avgFuel(logs: logs)))
+                                .font(.headline)
+                            Text("L")
+                                .foregroundColor(Color(hue: 1.0, saturation: 0.009, brightness: 0.398))
+                        }
+                        Spacer()
+                        HStack{
+                            Image(systemName: "speedometer")
+                            Text(String(format: "%.2f", avgEfficiency(logs: logs)))
+                                .font(.headline)
+                            Text("L per 100 km")
+                                .foregroundColor(Color(hue: 1.0, saturation: 0.009, brightness: 0.398))
+                        }
+                        Spacer()
+                        
                     }
                 }
+                .headerProminence(.increased)
+                Section(header: Text("History")){
+                    ForEach(logs){ log in
+                        NavigationLink {
+                            DetailView(item: log)
+                        }
+                        label : {
+                            Text(log.created ?? Date(), style: .date)
+                        }
+                    }
+                }
+                .headerProminence(.increased)
 //                .onDelete(perform: removeItems)
             }
-            .navigationTitle("History")
+            .navigationTitle("Welcome")
                         .toolbar {
-                            ToolbarItemGroup(placement: .cancellationAction){
-                                EditButton()
-                            }
                             ToolbarItemGroup(placement: .confirmationAction){
                                 Button {
                                     showingSheet.toggle()
@@ -58,28 +95,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let dataController = DataController()
-        let viewContext = dataController.container.viewContext
-        
-        dataController.container.viewContext.deleteAllObjects()
-        try? dataController.container.viewContext.save()
-        
-        let testLog = Log(context: viewContext)
-        testLog.id = UUID()
-        testLog.created = Date()
-        testLog.distance = 623.0
-        testLog.fuel = 52
-        testLog.efficiency = testLog.fuel / testLog.distance
-        
-        return ContentView()
-            .environment(\.managedObjectContext, viewContext)
-            .onAppear {
-                do {
-                    try viewContext.save()
-                } catch {
-                    let nsError = error as NSError
-                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                }
-            }
+       ContentView()
     }
 }
