@@ -8,48 +8,59 @@
 import SwiftUI
 
 struct DetailView: View {
-     
+    @Environment(\.managedObjectContext) var moc
+    @Environment(\.dismiss) var dismiss
+    
     var item: Log
     
-        var body: some View {
-        NavigationView{
-            List{
-                HStack{
-                    Text("Distance Travelled")
-                        .bold()
-                    Spacer()
-                    Text(String(item.distance))
-//                    Text(item.distance, format: .measurement(width: .abbreviated))
-                }
-                HStack{
-                    Text("Petrol Used")
-                        .bold()
-                    Spacer()
-                    Text(String(item.fuel))
-//                    Text(item.fuel, format: .measurement(width: .abbreviated))
-                }
-                HStack{
-                    Text("Efficiency")
-                        .bold()
-                    Spacer()
-                    Text(String(item.efficiency))
-//                    Text(item.efficiency, format: .measurement(width: .abbreviated))
+    var body: some View {
+        List{
+            HStack{
+                Image(systemName: "road.lanes")
+                Text("Distance Travelled")
+                    .bold()
+                Spacer()
+                Text(String(item.distance))
+                Text("km")
+            }
+            HStack{
+                Image(systemName: "fuelpump")
+                Text("Petrol Used")
+                    .bold()
+                Spacer()
+                Text(String(item.fuel))
+                Text("L")
+            }
+            HStack{
+                Image(systemName: "speedometer")
+                Text("Efficiency")
+                    .bold()
+                Spacer()
+                Text(String(format: "%.2f", item.efficiency))
+                Text("L per 100 km")
+            }
+        }
+        .toolbar{
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button {
+                    deleteLog()
+                } label: {
+                    Label("Delete", systemImage: "trash")
                 }
             }
-            .navigationTitle(Text(item.created ?? Date(), format: .dateTime.day().month().year()))
         }
+        .navigationTitle(Text(item.created ?? Date(), format: .dateTime.day().month().year()))
+    }
+    func deleteLog() {
+        moc.delete(item)
+        
+        try? moc.save()
+        dismiss()
     }
 }
 
 //struct DetailView_Previews: PreviewProvider {
-////    static let d = Measurement(value: 216.5, unit: UnitLength.kilometers)
-////    static let v = Measurement(value: 65468789645, unit: UnitVolume.liters)
-////    static let e = Measurement(value: 9.8, unit: UnitFuelEfficiency.litersPer100Kilometers)
-////
-////    static let test = Entry(created: Date.now, distance: d, fuel: v, efficiency: e)
-//
 //    static var previews: some View {
 //        DetailView()
-////            .environment(\.locale, .init(identifier: "en_AU"))
 //    }
 //}
