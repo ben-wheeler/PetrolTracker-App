@@ -13,6 +13,7 @@
 		B587968128124D1100ABA24E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B587968028124D1100ABA24E /* Preview Assets.xcassets */; };
 		B587968828124FE500ABA24E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B587968728124FE500ABA24E /* DetailView.swift */; };
 		B9769C8E29DE7AF400388A43 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B9769C8C29DE7AF400388A43 /* Model.xcdatamodeld */; };
+		B9769C9029DE7C0100388A43 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9769C8F29DE7C0100388A43 /* DataController.swift */; };
 		B97827F3295E717B0037F8B3 /* NewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97827F2295E717B0037F8B3 /* NewView.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +25,7 @@
 		B587968028124D1100ABA24E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B587968728124FE500ABA24E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		B9769C8D29DE7AF400388A43 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		B9769C8F29DE7C0100388A43 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		B97827F2295E717B0037F8B3 /* NewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,6 +61,7 @@
 			children = (
 				B587967928124D1100ABA24E /* PetrolApp.swift */,
 				B587967B28124D1100ABA24E /* ContentView.swift */,
+				B9769C8F29DE7C0100388A43 /* DataController.swift */,
 				B587968728124FE500ABA24E /* DetailView.swift */,
 				B97827F2295E717B0037F8B3 /* NewView.swift */,
 				B587967D28124D1100ABA24E /* Assets.xcassets */,
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B587967C28124D1100ABA24E /* ContentView.swift in Sources */,
+				B9769C9029DE7C0100388A43 /* DataController.swift in Sources */,
 				B97827F3295E717B0037F8B3 /* NewView.swift in Sources */,
 				B9769C8E29DE7AF400388A43 /* Model.xcdatamodeld in Sources */,
 				B587968828124FE500ABA24E /* DetailView.swift in Sources */,
