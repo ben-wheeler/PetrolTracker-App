@@ -8,51 +8,27 @@
 import SwiftUI
 import Foundation
 
-struct Entry: Identifiable, Codable {
-    var id = UUID()
-    let created: Date
-    var distance: Measurement<UnitLength>
-    let fuel: Measurement<UnitVolume>
-    let efficiency: Measurement<UnitFuelEfficiency>
-}
-
-class Log: ObservableObject {
-    @Published var items = [Entry](){
-        didSet {
-            if let encoded = try? JSONEncoder().encode(items) {
-                UserDefaults.standard.set(encoded, forKey: "Items")
-            }
-        }
-    }
-    init() {
-        if let savedItems = UserDefaults.standard.data(forKey: "Items") {
-            if let decodedItems = try? JSONDecoder().decode([Entry].self, from: savedItems) {
-                items = decodedItems
-                return
-            }
-        }
-        items = []
-    }
-}
-
 struct ContentView: View {
-    @StateObject var History = Log()
     
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\Log.created)])
+    var logs: FetchedResults<Log>
+        
     @State private var showingSheet = false
-
 
     var body: some View {
         NavigationView {
             List{
-                ForEach(History.items){ log in
+                ForEach(logs){ log in
                     NavigationLink {
                         DetailView(item: log)
                     }
                     label : {
-                        Text(log.created, style: .date)
+                        Text(log.created ?? Date(), style: .date)
                     }
                 }
-                .onDelete(perform: removeItems)
+//                .onDelete(perform: removeItems)
             }
             .navigationTitle("History")
                         .toolbar {
@@ -69,18 +45,41 @@ struct ContentView: View {
                         }
             
             .sheet(isPresented: $showingSheet) {
-                NewView(log: History)
+                NewView()
             }
         }
     }
     
-    func removeItems(at offsets: IndexSet) {
-        History.items.remove(atOffsets: offsets)
-    }
+//    func removeItems(at offsets: IndexSet) {
+//        History.items.remove(atOffsets: offsets)
+//    }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        
+        let dataController = DataController()
+        let viewContext = dataController.container.viewContext
+        
+        dataController.container.viewContext.deleteAllObjects()
+        try? dataController.container.viewContext.save()
+        
+        let testLog = Log(context: viewContext)
+        testLog.id = UUID()
+        testLog.created = Date()
+        testLog.distance = 623.0
+        testLog.fuel = 52
+        testLog.efficiency = testLog.fuel / testLog.distance
+        
+        return ContentView()
+            .environment(\.managedObjectContext, viewContext)
+            .onAppear {
+                do {
+                    try viewContext.save()
+                } catch {
+                    let nsError = error as NSError
+                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                }
+            }
     }
 }
